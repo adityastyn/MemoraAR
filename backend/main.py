@@ -45,6 +45,10 @@ FAMILY_DATABASE = {
         "relation": "CHESS PARTNER",
         "note": "You won the last game against him."
     }
+    "GAYATHRI": {
+        "relation": "GRAND DAUGHTER",
+        "note": "You won the last game of chess against her."
+    }
 }
 
 @app.get("/")
