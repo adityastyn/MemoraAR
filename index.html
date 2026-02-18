@@ -1,1 +1,70 @@
-.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memora | AR Memory Assistant</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; overflow: hidden;">
+
+    <div id="info-panel">
+        <h1>Memora Active</h1>
+        <p id="system-status">Initializing...</p>
+    </div>
+
+    <div id="controls">
+        <button onclick="triggerMedication()">Test Meds</button>
+        <button onclick="triggerOrientation()">Update Location</button>
+    </div>
+
+    <a-scene 
+        embedded 
+        arjs="sourceType: webcam; debugUIEnabled: false;" 
+        vr-mode-ui="enabled: false">
+        
+        <a-entity camera look-controls>
+            <a-cursor 
+                id="cursor" 
+                color="cyan" 
+                fuse="false" 
+                raycaster="objects: .clickable"
+                scale="0.5 0.5 0.5"
+                position="0 0 -1"
+                opacity="0.7">
+            </a-cursor>
+        </a-entity>
+
+        <a-entity id="person-card" position="0 0.3 -4" visible="false">
+            <a-plane position="0 0 0" width="1.8" height="0.85" material="color: #000; opacity: 0.6; transparent: true"></a-plane>
+            
+            <a-plane id="card-border" position="0 0.4 0.01" width="1.8" height="0.03" color="#00E5FF"></a-plane>
+            
+            <a-text id="ar-name" value="Name" align="center" color="#00E5FF" position="0 0.2 0.05" width="4" font="kelsonsans"></a-text>
+            <a-text id="ar-relation" value="Relation" align="center" color="#FFFFFF" position="0 0 0.05" width="2.5" font="roboto"></a-text>
+            <a-text id="ar-note" value="Note" align="center" color="#CCCCCC" position="0 -0.25 0.05" width="2" font="roboto"></a-text>
+        </a-entity>
+
+        <a-entity id="med-card" position="0 0 -3.5" visible="false">
+            <a-plane position="0 0 0" width="1.6" height="0.9" color="#D32F2F" opacity="0.9"></a-plane>
+            
+            <a-text value="MEDICATION TIME" align="center" color="#FFF" position="0 0.3 0.05" width="3" font="kelsonsans"></a-text>
+            <a-text value="Blood Pressure (5mg)" align="center" color="#FFEB3B" position="0 0.1 0.05" width="2.5" font="kelsonsans"></a-text>
+            
+            <a-entity id="btn-taken" class="clickable" position="0 -0.25 0.05" geometry="primitive: plane; width: 1; height: 0.25" material="color: #4CAF50">
+                <a-text value="CLICK TO CONFIRM" align="center" color="#FFF" position="0 0 0.01" scale="0.8 0.8 0.8"></a-text>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="orientation-card" position="0 -1.2 -4" visible="true">
+            <a-plane width="2.5" height="0.4" material="color: #111; opacity: 0.7; transparent: true"></a-plane>
+            <a-text id="orientation-text" value="Loading location..." align="center" color="#FFF" width="2.5" font="roboto"></a-text>
+        </a-entity>
+
+    </a-scene>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>.
